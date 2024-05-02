@@ -423,6 +423,27 @@ body {
 }
 .links {
   margin-top: 32px;
+  display: flex;
+}
+.links__address {
+  width: 191px;
+  height: 60px;
+  margin-left: 8px;
+  border-radius: 12px;
+  background: #4765E2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.address__text {
+  color: var(--w, var(--white, #FFF));
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 133.333% */
+  text-transform: uppercase;
+  margin-right: 8px;
 }
 .girl {
   position: relative;

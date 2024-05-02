@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import copy from 'copy-to-clipboard';
+import Timeout from 'await-timeout';
 import BigLogo from "../img/biglogo.svg";
 import x from "../img/x.svg";
 import tg from "../img/tg.svg";
@@ -5,9 +8,41 @@ import girl from "../img/girl.png";
 import wallet from "../img/wallet.svg";
 import smile from "../img/smile.svg";
 import prize from "../img/prize.svg";
+import copyPic from "../img/copy.svg";
+const CA: string = "0x3f70bA81FC103A9dcC7119B50528947D6D1E5760";
 
 const Intro = () => {
     
+    useEffect(() => {
+        if(CA) {
+            setAddress(  
+                `${CA.slice(0, 4)}....${CA.slice(-4)}`
+            );
+        } else {    
+            setAddress("TBA");
+        }
+    }, []);
+
+    const [address, setAddress] = useState(""); 
+
+    async function copyToClipboard() {
+        if(CA) {
+            copy(CA);
+            setAddress("Copied");
+            await Timeout.set(1000);
+            setAddress(
+                `${CA.slice(0, 4)}....${CA.slice(-4)}`
+            );
+        } else {
+            copy("contract to be announced");
+            setAddress("Copied");
+            await Timeout.set(1000);
+            setAddress(
+                "TBA"
+            );
+        }
+    }
+
     return (
         <>
             <a id="intro" className="anchor" href=""></a>
@@ -27,6 +62,16 @@ const Intro = () => {
                     <a target="_blank" href="#">
                         <img src={tg} alt="tg"/>
                     </a>
+                    <div
+                        onClick={() => {
+                            copyToClipboard()
+                        }}
+                        className="links__address">
+                        <div className="address__text">
+                            {address}
+                        </div>
+                        <img src={copyPic} alt="" />
+                    </div>
                 </div>
             </div>
             <div className="girl">
